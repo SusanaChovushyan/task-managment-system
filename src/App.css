@@ -1,38 +1,200 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
+:root {
+  --body-bg-color: #e4e6f5;
+  --border-color: #e5e4e9;
+  --theme-bg-color: #fff;
+  --body-color: #1b1f31;
+  --main-color: #7a7e9d;
+  --main-light-color: #a1a4b9;
+  --title-color: #979dc3;
+  --body-font: "Jost", sans-serif;
+  --button-bg-color: #eaeefc;
+  --button-color: #4d76fd;
+  --unselected-mail: #f1f2f7;
+  --calendar-border-color: #cbcfe0;
+  --main-container-bg: #f0f0f7;
+ }
+ 
+ * {
+  outline: none;
+  box-sizing: border-box;
+  margin: 0;
+ }
+ body {
+  font-family: var(--body-font);
+  background-color: var(--body-bg-color);
+  font-size: 15px;
+ }
+.task-container{
+  background-color: var(--theme-bg-color);
+  display: flex;
+  max-width: 1440px;
+  height: 100vh;
+  margin: 0 auto;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.column{
+  max-width: 360px;
+  width: 100%;
+  border-right: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  overflow-x: auto;
+}
+.column h1{
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  background-color: var(--theme-bg-color);
+  border-left: 4px solid #b36dfb;
+  border-bottom: 4px solid #b36dfb;
+  padding: 20px;
+}
+.task{
+  font-size: 15px;
+  min-height: 300px;
+  height: 100%;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  background-color: var(--theme-bg-color);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  padding: 20px;
+  transition: background-color 0.3s ease; /* Adding transition */
+}
+.task:hover{
+  background-color: var(--body-bg-color);
+  cursor: pointer;
+}
+.task h2{
+  font-size: 20px;
+  color: var(--title-color);
+  margin-bottom: 10px;
+}
+.description{
+  color: var(--main-light-color);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: start;
+  margin-bottom: 10px;
+}
+.assignee{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.edit-task{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.options{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  color: var(--main-light-color);
+}
+.modal-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  z-index: 20;
+}
+.modal-content{
+  background-color: white;
+  padding: 40px 20px 20px;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+}
+.modal-actions{
+  display: flex;
+  justify-content: space-between;
+}
+input , textarea {
+	margin:15px 0;
+	padding:15px 10px;
+	width:100%;
+	outline:none;
+	border:1px solid #bbb;
+	border-radius: 5px;
+	display:inline-block;
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+    -webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+}
+input[type=submit] {
+	padding:15px 50px;
+	width:auto;
+	background:#1abc9c;
+	border:none;
+	color:white;
+	cursor:pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	-webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
 }
 
-.App-link {
-  color: #61dafb;
+input[type=submit]:hover {
+	opacity:0.8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="submit"]:active {
+	opacity:0.4;
+}
+.close{
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  background: white;
+  color: var(--title-color);
+  font-size: 20px;
+  padding: 0;
+}
+.close:hover {
+  background-color: white;
+}
+.edit-task button:nth-of-type(1){
+  margin-right: 10px;
+ 
+}
+button{
+  background-color: var(--button-color);
+  border: 0;
+  padding: 10px 30px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #2656ab;
 }
